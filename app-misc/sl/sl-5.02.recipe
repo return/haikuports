@@ -1,0 +1,54 @@
+SUMMARY="A sophisticated graphical program which corrects your miss typing"
+DESCRIPTION="SL is an extremely sophisticated type remediation \
+program at which you will be astonished. It runs across your \
+terminal when you type \"sl\" instead of \"ls\". 
+
+The original program has experienced gradual modifications and \
+enhancements so that one can never think of better software than SL."
+HOMEPAGE="http://www.tkl.iis.u-tokyo.ac.jp/~toyoda/index_e.html"
+COPYRIGHT="1993,2014 Toyoda Masashi"
+LICENSE="Toyoda Masashi"
+REVISION="2"
+SOURCE_URI="https://github.com/mtoyoda/sl/archive/$portVersion.tar.gz"
+CHECKSUM_SHA256="1e5996757f879c81f202a18ad8e982195cf51c41727d3fea4af01fdcbbb5563a"
+SOURCE_DIR="sl-$portVersion"
+
+ARCHITECTURES="?x86_gcc2 x86 x86_64"
+
+PROVIDES="
+	sl = $portVersion
+	cmd:sl = $portVersion
+	"
+
+REQUIRES="
+	haiku
+	lib:libncursesw
+	"
+
+BUILD_REQUIRES="
+	haiku_devel
+	devel:libncursesw
+	"
+BUILD_PREREQUIRES="
+	cmd:aclocal
+	cmd:autoconf
+	cmd:automake
+	cmd:find
+	cmd:gcc
+	cmd:ld
+	cmd:libtoolize
+	cmd:make
+	"
+
+BUILD()
+{		
+	make $jobArgs
+}
+
+INSTALL()
+{
+	mkdir -p $binDir
+	mkdir -p $manDir/man1
+	cp sl $binDir
+	cp sl.1 $manDir/man1
+}
