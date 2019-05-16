@@ -113,7 +113,8 @@ BUILD()
 	gn gen out.gn/$ARCH.release --args="target_os=\"haiku\" target_cpu=\"$ARCH\"
         v8_enable_embedded_builtins = false is_debug = false symbol_level=0
         is_clang=true treat_warnings_as_errors=false use_sysroot=false
-        v8_enable_i18n_support=false is_component_build=true"
+        v8_enable_i18n_support=false is_component_build=true 
+        v8_use_snapshot=false"
 
 	ninja -C out.gn/$ARCH.release $jobArgs
 }
@@ -136,6 +137,6 @@ TEST()
 	export LIBRARY_PATH=$LIBRARY_PATH::./out.gn/$ARCH.release
 
 	python tools/run-tests.py --gn -p color \
-	--report -v $jobArgs -m release mjsunit webkit # mjsunit cctest
+	--report -v $jobArgs -m release mjsunit/asm/embenchen/box2d #webkit # mjsunit cctest
 }
 
