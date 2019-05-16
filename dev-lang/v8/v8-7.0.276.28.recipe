@@ -136,6 +136,6 @@ TEST()
 	export LIBRARY_PATH=$LIBRARY_PATH::./out.gn/$ARCH.release
 
 	python tools/run-tests.py --gn -p color \
-	--report -v $jobArgs -m release webkit #cctest mjsunit
+	--report -v $jobArgs -m release mjsunit webkit # mjsunit cctest
 }
 
